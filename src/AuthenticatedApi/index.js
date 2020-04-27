@@ -27,11 +27,11 @@ exports.handler = async message => {
     return { statusCode: 400 };
   }
 
-  let sections = token.split('.');
+  const sections = token.split('.');
   // get the kid from the headers prior to verification
   let header = jose.util.base64url.decode(sections[0]);
   header = JSON.parse(header);
-  let kid = header.kid;
+  const kid = header.kid;
 
   // download the public keys
   const response = await superagent.get(keysUrl).set('accept', 'json');
@@ -66,10 +66,10 @@ exports.handler = async message => {
     result = await jose.JWS.createVerify(result).verify(token);
 
     // now we can use the claims
-    let claims = JSON.parse(result.payload);
+    const claims = JSON.parse(result.payload);
 
     // additionally we can verify the token expiration
-    let currentTs = Math.floor(new Date() / 1000);
+    const currentTs = Math.floor(new Date() / 1000);
     if (currentTs > claims.exp) {
       console.log('Token expired');
       return { statusCode: 401 };

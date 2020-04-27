@@ -1,7 +1,11 @@
 {
+  "name": "authenticatedapi",
+  "version": "1.0.0",
   "private": true,
+  "devDependencies": {
+    "aws-sdk": "~2"
+  },
   "dependencies": {
-    "aws-sdk": "~2",
     "node-jose": "^1.1.0",
     "superagent": "^4.1.0"
   }
