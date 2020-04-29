@@ -5,7 +5,7 @@ Resources:
     Type: AWS::Cognito::UserPool
     Properties:
       AdminCreateUserConfig:
-        AllowAdminCreateUserOnly: true
+        AllowAdminCreateUserOnly: false
       UserPoolName: !Sub ${AWS::StackName}-UserPool
       UsernameAttributes:
         - email
@@ -15,6 +15,8 @@ Resources:
         PreAuthentication: !GetAtt CognitoTriggered.Arn
         PostAuthentication: !GetAtt CognitoTriggered.Arn
         CustomMessage: !GetAtt CognitoTriggered.Arn
+      AutoVerifiedAttributes:
+        - email
   UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
